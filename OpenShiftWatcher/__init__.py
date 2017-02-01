@@ -1,5 +1,10 @@
 import requests
 import json
+import logging
+
+logger = logging.getLogger('podwatcher')
+logger.setLevel(logging.DEBUG)
+
 
 class OpenShiftWatcher(object):
     def __init__(self, os_api_endpoint, os_resource, os_namespace, os_auth_token, ca_trust='/etc/ssl/certs/ca-bundle.trust.crt'):
@@ -11,7 +16,8 @@ class OpenShiftWatcher(object):
                                        os_namespace="joe",
                                        os_auth_token="lTBiDnvYlHhuOl3C9Tj_Mb-FvL0hcMMONIua0E0D5CE")
         '''
-        self.os_api_url = "https://{0}/oapi/v1/namespaces/{1}/{2}?watch=true".format(os_api_endpoint, os_namespace, os_resource)
+        self.os_api_url = "https://{0}/api/v1/namespaces/{1}/{2}?watch=true".format(os_api_endpoint, os_namespace, os_resource)
+        logger.info(self.os_api_url)
         self.os_auth_token = os_auth_token
         self.session = requests.Session()
         self.ca_trust = ca_trust
@@ -22,7 +28,7 @@ class OpenShiftWatcher(object):
                                params=""
                                ).prepare()
 
-        resp = self.session.send(req, stream=True, verify=self.ca_trust)
+        resp = self.session.send(req, stream=True, verify=False)
 
         if resp.status_code != 200:
             raise Exception("Unable to contact OpenShift API. Message from server: {0}".format(resp.text))

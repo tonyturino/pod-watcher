@@ -39,7 +39,7 @@ def watch_pods():
             if phase == 'Running' and  name.startswith(app_name):
  
                  if event['type'] == 'DELETED':
-                     call(["get_pods.sh", "-d", app_name, "-n", project_name,  "-f", "/tmp"])
+                     call(["/opt/watcher/pod/get_pods.sh", "-d", app_name, "-n", project_name,  "-f", apollo_conf])
                      logger.info("Event Type: {0}".format(event['type']))
                      logger.info("--------------------------------------------------------------")
                  else:
@@ -60,7 +60,7 @@ def watch_pods():
                             logger.info("Phase: {0}".format(phase))
                             logger.info("--------------------------------------------------------------")
     
-                            call(["get_pods.sh", "-d", app_name, "-n", project_name,  "-f", apollo_conf])
+                            call(["/opt/watcher/pod/get_pods.sh", "-d", app_name, "-n", project_name,  "-f", apollo_conf])
                     
 
             else:

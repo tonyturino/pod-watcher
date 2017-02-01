@@ -9,9 +9,9 @@ RUN yum -y install ksh gcc yum-utils libffi-devel python-devel openssl-devel; \
 
 RUN mkdir -p /opt/watcher/pod
 
-RUN curl http://nexus-repository.rhel-cdk.10.1.2.2.xip.io/nexus/content/repositories/releases/com/redhat/occlient/3.3.17/occlient-3.3.17.gz | tar xf -C /usr/bin
+RUN curl http://nexus-repository.rhel-cdk.10.1.2.2.xip.io/nexus/content/repositories/releases/com/redhat/occlient/3.3.17/occlient-3.3.17.gz | tar xvzf - -C /usr/bin
 
-COPY OpenShiftWatcher /opt/watcher/pod/OpenShiftWatcher
+COPY OpenShiftWatcher /opt/watcher/OpenShiftWatcher
 
 COPY pod /opt/watcher/pod
 
