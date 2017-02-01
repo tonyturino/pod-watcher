@@ -2,6 +2,8 @@ FROM rhscl/python-27-rhel7
 
 ARG OC_CLIENT_URL=http://test.url/occlient-3.3.17.gz
 
+ENV OC_CLIENT_URL ${OC_CLIENT_URL}
+
 USER root
 
 RUN yum -y install ksh gcc yum-utils libffi-devel python-devel openssl-devel; \
