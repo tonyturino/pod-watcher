@@ -18,7 +18,7 @@ k8s_namespace=os.environ['OS_NAMESPACE']
 k8s_endpoint=os.environ['KUBERNETES_SERVICE_HOST']
 app_name=os.environ['APP_NAME']
 project_name=os.environ['PROJECT_NAME']
-apollo_conf = os.environ['APOLLO_CONF']
+properties_file = os.environ['PROPERTY_FILE']
 
 def watch_pods():
 
@@ -39,7 +39,7 @@ def watch_pods():
             if phase == 'Running' and  name.startswith(app_name):
  
                  if event['type'] == 'DELETED':
-                     call(["/opt/watcher/pod/get_pods.sh", "-d", app_name, "-n", project_name,  "-f", apollo_conf])
+                     call(["/opt/watcher/pod/get_pods.sh", "-d", app_name, "-n", project_name,  "-f", properties_file])
                      logger.info("Event Type: {0}".format(event['type']))
                      logger.info("--------------------------------------------------------------")
                  else:
@@ -60,7 +60,7 @@ def watch_pods():
                             logger.info("Phase: {0}".format(phase))
                             logger.info("--------------------------------------------------------------")
     
-                            call(["/opt/watcher/pod/get_pods.sh", "-d", app_name, "-n", project_name,  "-f", apollo_conf])
+                            call(["/opt/watcher/pod/get_pods.sh", "-d", app_name, "-n", project_name,  "-f", properties_file])
                     
 
             else:
