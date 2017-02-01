@@ -9,5 +9,9 @@
 This is an example of an application being created
 ```oc new-app https://github.com/mcanoy/pod-watcher.git --name=pod-watcher -l app=pod-watcher -n myDeployedNamespace -e PROERTIES_FILE=/tmp.properties -e PROJECT_NAME=myWatchedNamespace -e APP_NAME=myWatchedApplication```
 
+Based on the env variable in your docker file you'll also want to create an envrionmental variable for the build config because this application
+is bringing in the oc client.
+`oc env bc/myWatchedApplication OC_CLIENT_URL=http://rdht.com/oc.tar.gz -n myDeployedNamespace`
+
 It may also be necessary to give this pod permission to view the list of pods
 `oc policy add-role-to-user view system:serviceaccounts:myDeployedNamespace:default -n myWatchedNamespace`
