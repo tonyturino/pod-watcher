@@ -42,4 +42,4 @@ IPS=${IPS#?}
 
 echo $IPS
 
-#sed -i -e "s/^\(apollo\.slave\.urls\s*=\s*\).*\$/\1$IPS/" $PROP_FILE
+sed -i -e "s/^\(apollo\.slave\.urls\s*=\s*\).*\$/\1$IPS/" $PROP_FILE
