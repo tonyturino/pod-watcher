@@ -11,7 +11,7 @@ RUN yum -y install ksh gcc yum-utils libffi-devel python-devel openssl-devel; \
   scl enable python27 "pip install requests pkiutils pyopenssl cryptography"; \
   yum clean all;
 
-RUN mkdir -p /opt/watcher/pod
+RUN mkdir -p /opt/watcher/pod && mkdir -p /apollo && chmod 777 /apollo && chown -R 1001:1001 /apollo
 
 RUN curl ${OC_CLIENT_URL} | tar xvzf - -C /usr/bin
 
