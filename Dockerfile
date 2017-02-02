@@ -1,4 +1,4 @@
-FROM rhscl/python-27-rhel7
+FROM python:2.7
 
 ARG OC_CLIENT_URL=http://test.url/occlient-3.3.17.gz
 
