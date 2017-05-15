@@ -6,6 +6,11 @@ ENV OC_CLIENT_URL ${OC_CLIENT_URL}
 
 USER root
 
+RUN yum clean all && \
+    yum-config-manager --disable rhel* 1>/dev/null && \
+    yum-config-manager --enable rhel-7-server-rpms && \
+    yum-config-manager --enable rhel-7-server-ose-3.2-rpms
+
 RUN yum -y install ksh gcc yum-utils libffi-devel python-devel openssl-devel; \
   yum-config-manager --enable rhel-server-rhscl-7-rpms; \
   scl enable python27 "pip install requests pkiutils pyopenssl cryptography"; \
