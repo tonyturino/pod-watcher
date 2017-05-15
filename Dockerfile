@@ -16,7 +16,7 @@ RUN yum -y install ksh gcc yum-utils libffi-devel python-devel openssl-devel; \
   scl enable python27 "pip install requests pkiutils pyopenssl cryptography"; \
   yum clean all;
 
-RUN mkdir -p /opt/watcher/pod && mkdir -p /apollo && chmod 777 /apollo && chown -R 1000630000:1000630000 /apollo
+RUN mkdir -p /opt/watcher/pod && mkdir -p /apollo && chmod 777 /apollo && chown -R 1000070000:1000070000 /apollo
 
 RUN curl ${OC_CLIENT_URL} | tar xvzf - -C /usr/bin
 
@@ -24,8 +24,8 @@ COPY OpenShiftWatcher /opt/watcher/OpenShiftWatcher
 
 COPY pod /opt/watcher/pod
 
-RUN chown -R 1000630000:1000630000 /opt/watcher/ && chmod u+x /opt/watcher/pod/pod_watch.sh && chmod u+x /opt/watcher/pod/get_pods.sh
+RUN chown -R 1000070000:1000070000 /opt/watcher/ && chmod a+x /opt/watcher/pod/pod_watch.sh && chmod a+x /opt/watcher/pod/get_pods.sh
 
-USER 1000630000
+USER 1000070000
 
 ENTRYPOINT "/opt/watcher/pod/pod_watch.sh"
